@@ -1,8 +1,3 @@
-"use client";
-
-// Google Analytics 4
-// Set NEXT_PUBLIC_GA_MEASUREMENT_ID to enable analytics.
-
 export const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 declare global {
