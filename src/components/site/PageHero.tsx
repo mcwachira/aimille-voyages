@@ -1,5 +1,5 @@
 
-import Image from "next/image";
+import Image, {type StaticImageData} from "next/image";
 import type { ReactNode } from "react";
 
 export function PageHero({
@@ -9,7 +9,7 @@ export function PageHero({
                              children,
                              alt,
                          }: {
-    image: string;
+    image: StaticImageData | string;
     eyebrow?: string;
     title: ReactNode;
     children?: ReactNode;
