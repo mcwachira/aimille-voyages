@@ -1,5 +1,7 @@
+
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { Monitor, Moon, Sun } from "lucide-react";
 
@@ -12,14 +14,40 @@ import {
 
 import { Button } from "@/components/ui/button";
 
+import { cn } from "@/lib/utils";
+
 const OPTIONS = [
     { value: "light", label: "Light", icon: Sun },
     { value: "dark", label: "Dark", icon: Moon },
     { value: "system", label: "System", icon: Monitor },
 ] as const;
 
-export function ThemeToggle() {
-    const { theme, setTheme, resolvedTheme } = useTheme();
+export function ThemeToggle({
+                                className,
+                            }: {
+    className?: string;
+}) {
+    const mounted = useSyncExternalStore(
+        () => () => {},
+        () => true,
+        () => false,
+    );
+    const { theme, setTheme } = useTheme();
+
+    // Keep server and initial browser render identical.
+    if (!mounted) {
+        return (
+            <Button
+                variant="ghost"
+                size="icon"
+                aria-label="Change theme"
+                disabled
+                className={cn(className)}
+            >
+                <Monitor className="h-5 w-5" />
+            </Button>
+        );
+    }
 
     const currentTheme =
         OPTIONS.find((option) => option.value === theme) ?? OPTIONS[2];
@@ -28,11 +56,18 @@ export function ThemeToggle() {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label="Change theme">
-                    <Icon className="h-5 w-5" />
-                </Button>
-            </DropdownMenuTrigger>
+            <DropdownMenuTrigger
+                render={
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label="Change theme"
+                        className={cn(className)}
+                    >
+                        <Icon className="h-5 w-5" />
+                    </Button>
+                }
+            />
 
             <DropdownMenuContent align="end">
                 {OPTIONS.map((option) => {
@@ -49,8 +84,8 @@ export function ThemeToggle() {
 
                             {theme === option.value && (
                                 <span className="ml-auto text-xs text-muted-foreground">
-                  Active
-                </span>
+                                    Active
+                                </span>
                             )}
                         </DropdownMenuItem>
                     );

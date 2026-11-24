@@ -1,13 +1,13 @@
-
 import type { Metadata } from "next";
-import Image from "next/image";
 
 import watamu from "@/assets/watamu.jpg";
 import { PageHero } from "@/components/site/PageHero";
 import { DestinationCard } from "@/components/site/TravelCards";
 import { Reveal } from "@/components/site/Reveal";
-import { DESTINATIONS } from "@/content/destinations";
 import { FinalCta } from "@/components/site/FinalCta";
+import { client } from "@/sanity/lib/client";
+import { DESTINATIONS_QUERY } from "@/sanity/queries";
+import type { SanityDestination } from "@/sanity/types";
 
 export const metadata: Metadata = {
     title: "Kenya Destinations | Safari & Beach | AIMILLE VOYAGES",
@@ -24,8 +24,15 @@ export const metadata: Metadata = {
     },
 };
 
-export default function DestinationsPage() {
-    const countries = [...new Set(DESTINATIONS.map((destination) => destination.country))];
+export default async function DestinationsPage() {
+    const destinations = (await client.fetch(
+        DESTINATIONS_QUERY,
+    )) as SanityDestination[];
+
+    const countries = [
+        ...new Set(destinations.map((destination) => destination.country)),
+    ];
+
 
     return (
         <>
@@ -43,11 +50,11 @@ export default function DestinationsPage() {
                     <h2 className="text-5xl text-primary">{country}</h2>
 
                     <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                        {DESTINATIONS
+                        {destinations
                             .filter((destination) => destination.country === country)
                             .map((destination, index) => (
                                 <Reveal
-                                    key={destination.slug}
+                                    key={destination._id}
                                     delay={(index % 3) * 80}
                                 >
                                     <DestinationCard d={destination} />
