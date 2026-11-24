@@ -1,26 +1,30 @@
-
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import {
-    EXPERIENCES,
-    getExperience,
-    getCategory,
-    verifiedDuration,
-} from "@/content/experiences";
-import { getDestination } from "@/content/destinations";
+import adventure from "@/assets/adventure.jpg";
 import { PageHero } from "@/components/site/PageHero";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { WhatsAppLink } from "@/components/site/WhatsAppLink";
 import { waMsg, SUPPLIER_NOTE } from "@/content/site";
+import { client } from "@/sanity/lib/client";
+import {
+    EXPERIENCES_QUERY,
+    EXPERIENCE_BY_SLUG_QUERY,
+} from "@/sanity/queries";
+import { sanityImageUrl } from "@/sanity/lib/image";
+import type { SanityExperience } from "@/sanity/types";
 
 type ExperiencePageProps = {
     params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-    return EXPERIENCES.map((experience) => ({
+export async function generateStaticParams() {
+    const experiences = (await client.fetch(
+        EXPERIENCES_QUERY,
+    )) as SanityExperience[];
+
+    return experiences.map((experience) => ({
         slug: experience.slug,
     }));
 }
@@ -29,7 +33,10 @@ export async function generateMetadata({
                                            params,
                                        }: ExperiencePageProps): Promise<Metadata> {
     const { slug } = await params;
-    const experience = getExperience(slug);
+
+    const experience = (await client.fetch(EXPERIENCE_BY_SLUG_QUERY, {
+        slug,
+    })) as SanityExperience | null;
 
     if (!experience) {
         return {
@@ -37,8 +44,12 @@ export async function generateMetadata({
         };
     }
 
-    const title = `${experience.title} | Kenya Experience | AIMILLE VOYAGES`;
-    const description = experience.description;
+    const title =
+        experience.seo?.metaTitle ||
+        `${experience.title} | Kenya Experience | AIMILLE VOYAGES`;
+
+    const description =
+        experience.seo?.metaDescription || experience.description;
 
     return {
         title,
@@ -58,20 +69,27 @@ export default async function ExperiencePage({
                                                  params,
                                              }: ExperiencePageProps) {
     const { slug } = await params;
-    const experience = getExperience(slug);
+
+    const experience = (await client.fetch(EXPERIENCE_BY_SLUG_QUERY, {
+        slug,
+    })) as SanityExperience | null;
 
     if (!experience) {
         notFound();
     }
 
-    const category = getCategory(experience.category);
-    const destination = getDestination(experience.destination);
-    const duration = verifiedDuration(experience);
+    const category = experience.category;
+    const destination = experience.destination;
+
+    const duration =
+        experience.duration && experience.durationVerified
+            ? experience.duration
+            : undefined;
 
     return (
         <>
             <PageHero
-                image={experience.image}
+                image={sanityImageUrl(experience.image, adventure)}
                 alt={experience.title}
                 eyebrow={category?.name}
                 title={experience.title}
@@ -115,21 +133,25 @@ export default async function ExperiencePage({
                         )}
                     </dl>
 
-                    <h2 className="eyebrow mt-12 text-gold">
-                        Important considerations
-                    </h2>
+                    {!!experience.considerations?.length && (
+                        <>
+                            <h2 className="eyebrow mt-12 text-gold">
+                                Important considerations
+                            </h2>
 
-                    <ul className="mt-5 space-y-3">
-                        {experience.considerations.map((item) => (
-                            <li
-                                key={item}
-                                className="flex gap-3 text-muted-foreground"
-                            >
-                                <span className="mt-3 h-px w-5 shrink-0 bg-gold" />
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
+                            <ul className="mt-5 space-y-3">
+                                {experience.considerations.map((item) => (
+                                    <li
+                                        key={item}
+                                        className="flex gap-3 text-muted-foreground"
+                                    >
+                                        <span className="mt-3 h-px w-5 shrink-0 bg-gold" />
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                    )}
 
                     <p className="mt-10 text-xs leading-relaxed text-muted-foreground">
                         {SUPPLIER_NOTE}

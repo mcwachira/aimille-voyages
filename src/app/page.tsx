@@ -184,7 +184,7 @@ export default function HomePage() {
 
                     <div className="absolute -bottom-8 left-0 hidden w-48 border border-gold bg-background p-5 md:block">
                         <p className="font-serif text-xl italic text-primary">
-                            "We take care of the details."
+                            &ldquo;We take care of the details.&rdquo;
                         </p>
                     </div>
                 </Reveal>
@@ -314,11 +314,11 @@ export default function HomePage() {
                             </p>
 
                             <h2 className="mt-5 text-4xl text-primary md:text-6xl">
-                                Staying in Kenya a Little Longer? We've Got You.
+                                Staying in Kenya a Little Longer? We&apos;ve Got You.
                             </h2>
 
                             <p className="mt-6 leading-relaxed text-primary/80">
-                                Whether you're spending 30 days exploring, 60 days working
+                                Whether you&apos;re spending 30 days exploring, 60 days working
                                 remotely or 90 days experiencing life in Kenya, AIMILLE
                                 VOYAGES helps make your extended stay easier.
                             </p>
@@ -434,7 +434,7 @@ export default function HomePage() {
             </section>
 
             {/* Final CTA */}
-            {/*<FinalCta />*/}
+            <FinalCta />
         </>
     );
 }

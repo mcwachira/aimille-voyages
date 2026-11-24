@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,14 +5,18 @@ import Link from "next/link";
 import adventure from "@/assets/adventure.jpg";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
-import {
-    EXPERIENCES,
-    EXPERIENCE_CATEGORIES,
-    getCategory,
-} from "@/content/experiences";
-import { getDestination } from "@/content/destinations";
 import { FinalCta } from "@/components/site/FinalCta";
 import { cn } from "@/lib/utils";
+import { client } from "@/sanity/lib/client";
+import {
+    EXPERIENCE_CATEGORIES_QUERY,
+    EXPERIENCES_QUERY,
+} from "@/sanity/queries";
+import { sanityImageUrl } from "@/sanity/lib/image";
+import type {
+    SanityExperience,
+    SanityExperienceCategory,
+} from "@/sanity/types";
 
 export const metadata: Metadata = {
     title: "Private Travel Experiences in Kenya | AIMILLE VOYAGES",
@@ -40,19 +43,27 @@ export default async function ExperiencesPage({
                                                   searchParams,
                                               }: ExperiencesPageProps) {
     const params = await searchParams;
+
     const requestedCategory = Array.isArray(params.category)
         ? params.category[0]
         : params.category;
 
-    const category = EXPERIENCE_CATEGORIES.some(
+    const [categories, experiences] = await Promise.all([
+        client.fetch(EXPERIENCE_CATEGORIES_QUERY),
+        client.fetch(EXPERIENCES_QUERY),
+    ]) as [SanityExperienceCategory[], SanityExperience[]];
+
+
+
+    const category = categories.find(
         (item) => item.slug === requestedCategory,
-    )
-        ? requestedCategory
-        : undefined;
+    );
 
     const list = category
-        ? EXPERIENCES.filter((experience) => experience.category === category)
-        : EXPERIENCES;
+        ? experiences.filter(
+            (experience) => experience.category?.slug === category.slug,
+        )
+        : experiences;
 
     return (
         <>
@@ -69,10 +80,10 @@ export default async function ExperiencesPage({
                         All
                     </CategoryChip>
 
-                    {EXPERIENCE_CATEGORIES.map((item) => (
+                    {categories.map((item) => (
                         <CategoryChip
-                            key={item.slug}
-                            active={category === item.slug}
+                            key={item._id}
+                            active={category?.slug === item.slug}
                             href={`/experiences?category=${encodeURIComponent(item.slug)}`}
                         >
                             {item.name}
@@ -81,45 +92,41 @@ export default async function ExperiencesPage({
                 </div>
 
                 <div className="mt-12 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-                    {list.map((experience, index) => {
-                        const destination = getDestination(experience.destination);
-                        const categoryInfo = getCategory(experience.category);
-
-                        return (
-                            <Reveal
-                                key={experience.slug}
-                                delay={(index % 3) * 80}
+                    {list.map((experience, index) => (
+                        <Reveal
+                            key={experience._id}
+                            delay={(index % 3) * 80}
+                        >
+                            <Link
+                                href={`/experiences/${experience.slug}`}
+                                className="group block"
                             >
-                                <Link
-                                    href={`/experiences/${experience.slug}`}
-                                    className="group block"
-                                >
-                                    <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
-                                        <Image
-                                            src={experience.image}
-                                            alt={experience.title}
-                                            fill
-                                            sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                                            className="img-zoom object-cover transition-transform duration-700 group-hover:scale-105"
-                                        />
-                                    </div>
+                                <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
+                                    <Image
+                                        src={sanityImageUrl(experience.image, adventure)}
+                                        alt={experience.title}
+                                        fill
+                                        sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                                        className="img-zoom object-cover transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                </div>
 
-                                    <p className="eyebrow mt-5 text-gold">
-                                        {categoryInfo?.name}
-                                        {destination && ` · ${destination.name}`}
-                                    </p>
+                                <p className="eyebrow mt-5 text-gold">
+                                    {experience.category?.name}
+                                    {experience.destination &&
+                                        ` · ${experience.destination.name}`}
+                                </p>
 
-                                    <h2 className="mt-2 text-3xl text-primary">
-                                        {experience.title}
-                                    </h2>
+                                <h2 className="mt-2 text-3xl text-primary">
+                                    {experience.title}
+                                </h2>
 
-                                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                                        {experience.description}
-                                    </p>
-                                </Link>
-                            </Reveal>
-                        );
-                    })}
+                                <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+                                    {experience.description}
+                                </p>
+                            </Link>
+                        </Reveal>
+                    ))}
                 </div>
 
                 {list.length === 0 && (

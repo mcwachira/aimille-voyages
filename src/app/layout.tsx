@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     ),
     title: {
         default: "AIMILLE VOYAGES | Bespoke Travel & Concierge in Kenya",
-        template: "%s | AIMILLE VOYAGES",
+        template: "%s",
     },
     description:
         "Discover Kenya with AIMILLE VOYAGES. Explore bespoke holidays, luxury accommodation, private transfers, curated experiences and personalised concierge services.",

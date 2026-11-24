@@ -27,12 +27,12 @@ export default function PlanYourTripPage() {
                 <p className="eyebrow text-gold">Plan Your Trip</p>
 
                 <h1 className="mt-5 text-5xl text-primary md:text-6xl">
-                    Let's shape your journey.
+                    Let&apos;s shape your journey.
                 </h1>
 
                 <p className="mt-6 leading-relaxed text-muted-foreground">
                     A few questions help us understand what you have in mind. Still
-                    exploring? That's fine. Leave dates and budget open.
+                    exploring? That&apos;s fine. Leave dates and budget open.
                 </p>
 
                 <p className="mt-8 text-sm text-muted-foreground">Prefer to talk?</p>
@@ -50,5 +50,4 @@ export default function PlanYourTripPage() {
             </div>
         </section>
     );
-}
 }

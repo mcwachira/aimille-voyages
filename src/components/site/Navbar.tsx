@@ -34,11 +34,6 @@ export function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Close menu after navigation.
-    useEffect(() => {
-        setOpen(false);
-    }, [pathname]);
-
     // Close menu with Escape and prevent background scrolling.
     useEffect(() => {
         if (!open) return;

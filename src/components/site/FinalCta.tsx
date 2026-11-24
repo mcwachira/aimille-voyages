@@ -18,7 +18,7 @@ export function FinalCta({
                 </h2>
 
                 <p className="mx-auto mt-6 max-w-xl leading-relaxed text-ivory/75">
-                    Tell us what you have in mind. We'll help you explore the possibilities
+                    Tell us what you have in mind. We&apos;ll help you explore the possibilities
                     and coordinate a journey that feels entirely yours.
                 </p>
 

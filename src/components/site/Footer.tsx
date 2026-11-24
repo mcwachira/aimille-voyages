@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 
-import { NAV, SITE, whatsappUrl } from "@/content/site";
+import { NAV, SITE } from "@/content/site";
 import { SERVICES, serviceHref } from "@/content/services";
 import { DESTINATIONS } from "@/content/destinations";
 
