@@ -55,7 +55,7 @@ export default function ContactPage() {
             {/* Contact information */}
             <div className="flex flex-col">
                 <div>
-                    <p className="eyebrow text-gold">Get in touch</p>
+                    <p className="eyebrow text-gold-readable">Get in touch</p>
 
                     <h1 className="mt-5 max-w-xl font-serif text-5xl leading-[1.08] text-primary sm:text-6xl lg:text-7xl">
                         Let&apos;s Start Planning Something Wonderful.
@@ -80,12 +80,12 @@ export default function ContactPage() {
                                         {contact.title}
                                     </p>
 
-                                    <div className="mt-2 break-words font-serif text-2xl text-primary transition-colors duration-300 group-hover:text-gold sm:text-3xl">
+                                    <div className="mt-2 break-words font-serif text-2xl text-primary transition-colors duration-300 group-hover:text-gold-readable sm:text-3xl">
                                         {contact.type === "whatsapp" && (
                                             <WhatsAppLink
                                                 location="contact_list"
                                                 message={waMsg("planning a trip")}
-                                                className="font-serif text-inherit hover:text-gold"
+                                                className="font-serif text-inherit hover:text-gold-readable"
                                             >
                                                 {contact.value}
                                             </WhatsAppLink>
@@ -96,7 +96,7 @@ export default function ContactPage() {
                                                 href={`mailto:${SITE.email}`}
                                                 event="email_click"
                                                 location="contact"
-                                                className="break-all hover:text-gold"
+                                                className="break-all hover:text-gold-readable"
                                             >
                                                 {contact.value}
                                             </TrackedAnchor>
@@ -107,7 +107,7 @@ export default function ContactPage() {
                                                 href={SITE.instagram}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="hover:text-gold"
+                                                className="hover:text-gold-readable"
                                             >
                                                 {contact.value}
                                             </a>
@@ -118,7 +118,7 @@ export default function ContactPage() {
                                                 href={SITE.tiktok}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="hover:text-gold"
+                                                className="hover:text-gold-readable"
                                             >
                                                 {contact.value}
                                             </a>
@@ -131,7 +131,7 @@ export default function ContactPage() {
                                 </div>
 
                                 <span
-                                    className="shrink-0 pt-1 text-sm text-gold transition-transform duration-300 group-hover:translate-x-1"
+                                    className="shrink-0 pt-1 text-sm text-gold-readable transition-transform duration-300 group-hover:translate-x-1"
                                     aria-hidden="true"
                                 >
                   ↗
@@ -156,7 +156,7 @@ export default function ContactPage() {
             {/* Enquiry form */}
             <div className="h-fit border border-border bg-card p-6 shadow-sm sm:p-8 md:p-10 lg:sticky lg:top-28">
                 <div className="mb-8">
-                    <p className="eyebrow text-gold">Send an enquiry</p>
+                    <p className="eyebrow text-gold-readable">Send an enquiry</p>
 
                     <h2 className="mt-3 font-serif text-3xl text-primary sm:text-4xl">
                         Tell us what you have in mind.

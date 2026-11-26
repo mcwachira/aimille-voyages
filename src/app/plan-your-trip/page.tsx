@@ -24,7 +24,7 @@ export default function PlanYourTripPage() {
     return (
         <section className="container-x grid gap-16 pb-24 pt-36 md:pt-44 lg:grid-cols-[1fr_2fr]">
             <div>
-                <p className="eyebrow text-gold">Plan Your Trip</p>
+                <p className="eyebrow text-gold-readable">Plan Your Trip</p>
 
                 <h1 className="mt-5 text-5xl text-primary md:text-6xl">
                     Let&apos;s shape your journey.
