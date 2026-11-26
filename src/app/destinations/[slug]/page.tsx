@@ -106,7 +106,7 @@ export default async function DestinationPage({
 
                     {!!destination.special?.length && (
                         <>
-                            <h2 className="eyebrow mt-16 text-gold">
+                            <h2 className="eyebrow mt-16 text-gold-readable">
                                 What makes it special
                             </h2>
 
@@ -125,7 +125,7 @@ export default async function DestinationPage({
 
                     {!!destination.experiences?.length && (
                         <>
-                            <h2 className="eyebrow mt-16 text-gold">
+                            <h2 className="eyebrow mt-16 text-gold-readable">
                                 Suggested experiences
                             </h2>
 
@@ -202,7 +202,7 @@ function Info({
 }) {
     return (
         <div>
-            <p className="eyebrow text-gold">{title}</p>
+            <p className="eyebrow text-gold-readable">{title}</p>
             <p className="mt-3 text-sm leading-relaxed text-primary/85">
                 {children}
             </p>

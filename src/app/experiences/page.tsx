@@ -111,7 +111,7 @@ export default async function ExperiencesPage({
                                     />
                                 </div>
 
-                                <p className="eyebrow mt-5 text-gold">
+                                <p className="eyebrow mt-5 text-gold-readable">
                                     {experience.category?.name}
                                     {experience.destination &&
                                         ` · ${experience.destination.name}`}

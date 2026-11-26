@@ -101,7 +101,7 @@ export default async function ExperiencePage({
                 <div>
                     <dl className="grid grid-cols-2 gap-6 border-y border-border py-6">
                         <div>
-                            <dt className="eyebrow text-gold">Destination</dt>
+                            <dt className="eyebrow text-gold-readable">Destination</dt>
                             <dd className="mt-2 font-serif text-2xl text-primary">
                                 {destination ? (
                                     <Link
@@ -117,7 +117,7 @@ export default async function ExperiencePage({
                         </div>
 
                         <div>
-                            <dt className="eyebrow text-gold">Category</dt>
+                            <dt className="eyebrow text-gold-readable">Category</dt>
                             <dd className="mt-2 font-serif text-2xl text-primary">
                                 {category?.name ?? "Experience"}
                             </dd>
@@ -125,7 +125,7 @@ export default async function ExperiencePage({
 
                         {duration && (
                             <div>
-                                <dt className="eyebrow text-gold">Duration</dt>
+                                <dt className="eyebrow text-gold-readable">Duration</dt>
                                 <dd className="mt-2 font-serif text-2xl text-primary">
                                     {duration}
                                 </dd>
@@ -135,7 +135,7 @@ export default async function ExperiencePage({
 
                     {!!experience.considerations?.length && (
                         <>
-                            <h2 className="eyebrow mt-12 text-gold">
+                            <h2 className="eyebrow mt-12 text-gold-readable">
                                 Important considerations
                             </h2>
 
