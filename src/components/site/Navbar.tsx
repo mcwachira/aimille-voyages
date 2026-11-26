@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -16,6 +16,12 @@ import { cn } from "@/lib/utils";
 export function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [open, setOpen] = useState(false);
+    const menuButtonRef = useRef<HTMLButtonElement>(null);
+    const mobileDialogRef = useRef<HTMLDivElement>(null);
+    const closeMenu = () => {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+    };
 
     const pathname = usePathname();
     const overHero = pathname === "/" && !scrolled;
@@ -40,9 +46,36 @@ export function Navbar() {
 
         const previousOverflow = document.body.style.overflow;
         document.body.style.overflow = "hidden";
+        mobileDialogRef.current
+            ?.querySelector<HTMLButtonElement>('button[aria-label="Close navigation menu"]')
+            ?.focus();
 
         const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") setOpen(false);
+            if (event.key === "Escape") {
+                setOpen(false);
+                menuButtonRef.current?.focus();
+                return;
+            }
+
+            if (event.key !== "Tab") return;
+
+            const focusable = Array.from(
+                mobileDialogRef.current?.querySelectorAll<HTMLElement>(
+                    'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+                ) ?? [],
+            ).filter((element) => element.getClientRects().length > 0);
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+
+            if (!first || !last) return;
+
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
         };
 
         window.addEventListener("keydown", handleKeyDown);
@@ -61,11 +94,11 @@ export function Navbar() {
     const navLinkClass = (href: string) =>
         cn(
             "relative whitespace-nowrap py-2 text-[0.7rem] font-medium uppercase tracking-[0.13em]",
-            "transition-colors duration-200 hover:text-gold",
+            "transition-colors duration-200 hover:text-gold-readable",
             overHero
                 ? "text-ivory [text-shadow:0_1px_8px_rgb(0_0_0/0.45)]"
                 : "text-primary",
-            isActive(href) && "text-gold",
+            isActive(href) && "text-gold-readable",
         );
 
     return (
@@ -118,7 +151,7 @@ export function Navbar() {
                             message={waMsg("planning a trip")}
                             className={cn(
                                 "whitespace-nowrap px-2 text-[0.7rem] font-medium uppercase tracking-[0.12em]",
-                                "transition-colors hover:text-gold",
+                                "transition-colors hover:text-gold-readable",
                                 overHero
                                     ? "text-ivory [text-shadow:0_1px_8px_rgb(0_0_0/0.45)]"
                                     : "text-primary",
@@ -164,10 +197,12 @@ export function Navbar() {
                         <button
                             type="button"
                             onClick={() => setOpen(true)}
+                            ref={menuButtonRef}
                             aria-label="Open navigation menu"
                             aria-expanded={open}
                             aria-controls="mobile-navigation"
-                            className="rounded-md p-2 transition-colors hover:bg-foreground/10 hover:text-gold"
+                            aria-haspopup="dialog"
+                            className="rounded-md p-2 transition-colors hover:bg-foreground/10 hover:text-gold-readable"
                         >
                             <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
                         </button>
@@ -178,6 +213,7 @@ export function Navbar() {
             {/* Full-screen mobile and tablet navigation */}
             {open && (
                 <div
+                    ref={mobileDialogRef}
                     id="mobile-navigation"
                     role="dialog"
                     aria-modal="true"
@@ -193,16 +229,16 @@ export function Navbar() {
                         <Link
                             href="/"
                             aria-label="AIMILLE VOYAGES home"
-                            onClick={() => setOpen(false)}
+                            onClick={closeMenu}
                         >
                             <Logo light />
                         </Link>
 
                         <button
                             type="button"
-                            onClick={() => setOpen(false)}
+                            onClick={closeMenu}
                             aria-label="Close navigation menu"
-                            className="rounded-md p-2 transition-colors hover:bg-white/10 hover:text-gold"
+                            className="rounded-md p-2 transition-colors hover:bg-white/10 hover:text-gold-readable"
                         >
                             <X className="h-6 w-6" />
                         </button>
@@ -217,14 +253,14 @@ export function Navbar() {
                                 <Link
                                     key={item.to}
                                     href={item.to}
-                                    onClick={() => setOpen(false)}
+                                    onClick={closeMenu}
                                     aria-current={isActive(item.to) ? "page" : undefined}
                                     className={cn(
                                         "flex items-center justify-between",
                                         "border-b border-ivory/15",
                                         "py-3.5 font-serif text-2xl sm:py-5 sm:text-3xl md:text-4xl",
-                                        "transition-colors hover:pl-2 hover:text-gold",
-                                        isActive(item.to) && "text-gold",
+                                        "transition-colors hover:pl-2 hover:text-gold-readable",
+                                        isActive(item.to) && "text-gold-readable",
                                     )}
                                 >
                                     <span>{item.label}</span>
@@ -238,7 +274,7 @@ export function Navbar() {
                         <div className="mt-8 grid gap-3 sm:grid-cols-2">
                             <Link
                                 href="/plan-your-trip"
-                                onClick={() => setOpen(false)}
+                                onClick={closeMenu}
                                 className={buttonVariants({
                                     variant: "gold",
                                     size: "xl",

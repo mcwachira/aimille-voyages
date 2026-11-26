@@ -354,7 +354,7 @@ export function TripPlanner() {
                 ))}
             </ol>
 
-            <p className="eyebrow mb-2 text-gold md:hidden">
+            <p className="eyebrow mb-2 text-gold-readable md:hidden">
                 Step {step + 1} of 5 · {STEPS[step]}
             </p>
 
@@ -368,6 +368,7 @@ export function TripPlanner() {
                             <Input
                                 className={fieldClass}
                                 value={s.name}
+                                required
                                 onChange={(event) => up("name", event.target.value)}
                                 autoComplete="name"
                             />
@@ -378,6 +379,7 @@ export function TripPlanner() {
                                 type="email"
                                 className={fieldClass}
                                 value={s.email}
+                                required
                                 onChange={(event) => up("email", event.target.value)}
                                 autoComplete="email"
                             />
@@ -441,7 +443,7 @@ export function TripPlanner() {
                                         {option}
 
                                         {selected && (
-                                            <Check className="h-4 w-4 text-gold" />
+                                            <Check className="h-4 w-4 text-gold-readable" />
                                         )}
                                     </button>
                                 );
@@ -775,14 +777,15 @@ function F({
 }) {
     return (
         <div className={full ? "md:col-span-2" : ""}>
-            <label className="eyebrow mb-2 block text-primary/80">
-                {label} {req && <span className="text-gold">*</span>}
+            <label className="block">
+                <span className="eyebrow mb-2 block text-primary/80">
+                    {label} {req && <span className="text-gold-readable">*</span>}
+                </span>
+                {children}
             </label>
 
-            {children}
-
             {error && (
-                <p className="mt-1.5 text-xs text-destructive">
+                <p className="mt-1.5 text-xs text-destructive" role="alert">
                     {error}
                 </p>
             )}
@@ -801,7 +804,7 @@ function Row({
 }) {
     return (
         <div className="flex flex-col gap-2 py-5 md:flex-row md:items-start md:gap-8">
-            <p className="eyebrow w-32 shrink-0 text-gold">{label}</p>
+            <p className="eyebrow w-32 shrink-0 text-gold-readable">{label}</p>
 
             <p className="flex-1 text-sm leading-relaxed">
                 {children}

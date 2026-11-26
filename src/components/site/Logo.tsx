@@ -12,7 +12,7 @@ export function Logo({ light }: { light?: boolean }) {
       <span className="font-serif text-2xl tracking-[0.18em]">
         AIMILLE
       </span>
-      <span className="eyebrow mt-1 text-[0.55rem] text-gold">
+      <span className="eyebrow mt-1 text-[0.55rem] text-gold-readable">
         Voyages
       </span>
     </span>

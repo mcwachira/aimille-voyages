@@ -30,7 +30,7 @@ export function PageHero({
 
             <div className="container-x relative pb-16 pt-36 text-ivory md:pb-24">
                 {eyebrow && (
-                    <p className="eyebrow text-gold">{eyebrow}</p>
+                    <p className="eyebrow text-gold-readable">{eyebrow}</p>
                 )}
 
                 <h1 className="mt-5 max-w-4xl text-5xl md:text-7xl">
@@ -62,7 +62,7 @@ export function SectionHeading({
         <div className={center ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
             {eyebrow && (
                 <p
-                    className={`eyebrow flex items-center gap-4 text-gold ${
+                    className={`eyebrow flex items-center gap-4 text-gold-readable ${
                         center ? "justify-center" : ""
                     }`}
                 >
