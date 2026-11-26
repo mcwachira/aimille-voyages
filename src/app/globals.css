@@ -6,8 +6,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant-garamond), ui-serif, Georgia, serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
@@ -32,6 +32,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-gold: var(--gold);
+  --color-gold-readable: var(--gold-readable);
   --color-sand: var(--sand);
   --color-ivory: var(--ivory);
   --color-jungle: var(--jungle);
@@ -53,6 +54,8 @@
   --jungle: oklch(0.316 0.05 163);
   --ivory: oklch(0.951 0.014 85);
   --gold: oklch(0.69 0.073 82);
+  --gold-readable: oklch(0.49 0.073 82);
+  --gold-on-dark: oklch(0.72 0.062 82);
   --sand: oklch(0.832 0.045 86);
   --overlay: oklch(0.2 0.03 163);
   /* Deep green bands (hero, footer, feature sections) stay dark in both themes */
@@ -97,6 +100,8 @@
 .dark {
   color-scheme: dark;
   --gold: oklch(0.72 0.062 82);
+  --gold-readable: var(--gold);
+  --gold-on-dark: var(--gold);
   --background: oklch(0.215 0.026 163);
   --foreground: oklch(0.93 0.014 85);
   --card: oklch(0.25 0.026 163);
@@ -127,6 +132,10 @@
   --sidebar-border: oklch(0.3 0.018 150);
   --sidebar-ring: var(--gold);
   --shadow-soft: 0 20px 50px -30px oklch(0 0 0 / 0.7);
+}
+
+:where(.bg-band, .bg-jungle) {
+  --gold-readable: var(--gold-on-dark);
 }
 
 @layer base {

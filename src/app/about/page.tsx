@@ -91,7 +91,7 @@ export default function AboutPage() {
                 <div className="container-x grid gap-12 md:grid-cols-2 md:gap-16">
                     <Reveal>
                         <div className="border-l-2 border-gold pl-6 md:pl-8">
-                            <p className="eyebrow text-gold">Our Mission</p>
+                            <p className="eyebrow text-gold-readable">Our Mission</p>
 
                             <p className="mt-5 font-serif text-3xl leading-snug text-primary md:text-4xl">
                                 To simplify travel and everyday experiences through thoughtful
@@ -102,7 +102,7 @@ export default function AboutPage() {
 
                     <Reveal delay={150}>
                         <div className="border-l-2 border-gold pl-6 md:pl-8">
-                            <p className="eyebrow text-gold">Our Vision</p>
+                            <p className="eyebrow text-gold-readable">Our Vision</p>
 
                             <p className="mt-5 font-serif text-3xl leading-snug text-primary md:text-4xl">
                                 To become a trusted travel and lifestyle concierge connecting
@@ -131,7 +131,7 @@ export default function AboutPage() {
                 </span>
 
                                 <span
-                                    className="text-sm text-gold"
+                                    className="text-sm text-gold-readable"
                                     aria-hidden="true"
                                 >
                   {String(index + 1).padStart(2, "0")}
@@ -146,7 +146,7 @@ export default function AboutPage() {
             <section className="relative overflow-hidden bg-band py-24 text-band-foreground md:py-32">
                 <div className="container-x relative max-w-3xl">
                     <Reveal>
-                        <p className="eyebrow text-gold">What makes us different</p>
+                        <p className="eyebrow text-gold-readable">What makes us different</p>
 
                         <h2 className="mt-5 font-serif text-4xl leading-tight md:text-5xl lg:text-6xl">
                             One concierge partner, from arrival to departure.

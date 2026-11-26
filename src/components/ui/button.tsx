@@ -23,7 +23,7 @@ const buttonVariants = cva(
         gold:
             "border-gold bg-gold text-jungle hover:bg-gold/85",
         line:
-            "border-current bg-transparent text-current hover:border-gold hover:text-gold",
+            "border-current bg-transparent text-current hover:border-gold hover:text-gold-readable",
         ghostLight:
             "border-transparent bg-transparent text-ivory hover:bg-ivory/10 hover:text-ivory",
 

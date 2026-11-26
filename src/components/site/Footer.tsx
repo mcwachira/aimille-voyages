@@ -18,7 +18,7 @@ export function Footer() {
                 <div className="max-w-sm lg:col-span-2">
                     <Logo light />
 
-                    <p className="eyebrow mt-6 text-gold">
+                    <p className="eyebrow mt-6 text-gold-readable">
                         {SITE.descriptor}
                     </p>
 
@@ -39,7 +39,7 @@ export function Footer() {
                         <Link
                             key={item.to}
                             href={item.to}
-                            className="transition-colors hover:text-gold"
+                            className="transition-colors hover:text-gold-readable"
                         >
                             {item.label}
                         </Link>
@@ -47,10 +47,13 @@ export function Footer() {
 
                     <Link
                         href="/plan-your-trip"
-                        className="transition-colors hover:text-gold"
+                        className="transition-colors hover:text-gold-readable"
                     >
                         Plan Your Trip
                     </Link>
+                    <Link href="/packages" className="transition-colors hover:text-gold-readable">Travel Packages</Link>
+                    <Link href="/articles" className="transition-colors hover:text-gold-readable">Travel Stories</Link>
+                    <Link href="/guides" className="transition-colors hover:text-gold-readable">Travel Guides</Link>
                 </FooterCol>
 
                 {/* Services */}
@@ -59,7 +62,7 @@ export function Footer() {
                         <Link
                             key={service.slug}
                             href={serviceHref(service)}
-                            className="transition-colors hover:text-gold"
+                            className="transition-colors hover:text-gold-readable"
                         >
                             {service.title}
                         </Link>
@@ -72,7 +75,7 @@ export function Footer() {
                         <Link
                             key={destination.slug}
                             href={`/destinations/${destination.slug}`}
-                            className="transition-colors hover:text-gold"
+                            className="transition-colors hover:text-gold-readable"
                         >
                             {destination.name}
                         </Link>
@@ -86,9 +89,9 @@ export function Footer() {
                 <WhatsAppLink
                     location="footer"
                     message={undefined}
-                    className="transition-colors hover:text-gold"
+                    className="transition-colors hover:text-gold-readable"
                 >
-          <span className="mb-1 block eyebrow text-gold">
+          <span className="mb-1 block eyebrow text-gold-readable">
             WhatsApp
           </span>
                     {SITE.whatsappDisplay}
@@ -98,9 +101,9 @@ export function Footer() {
                     href={`mailto:${SITE.email}`}
                     event="email_click"
                     location="footer"
-                    className="break-all transition-colors hover:text-gold"
+                    className="break-all transition-colors hover:text-gold-readable"
                 >
-          <span className="mb-1 block eyebrow text-gold">
+          <span className="mb-1 block eyebrow text-gold-readable">
             Email
           </span>
                     {SITE.email}
@@ -110,9 +113,9 @@ export function Footer() {
                     href={SITE.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-colors hover:text-gold"
+                    className="transition-colors hover:text-gold-readable"
                 >
-          <span className="mb-1 block eyebrow text-gold">
+          <span className="mb-1 block eyebrow text-gold-readable">
             Instagram
           </span>
                     {SITE.handle}
@@ -122,9 +125,9 @@ export function Footer() {
                     href={SITE.tiktok}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-colors hover:text-gold"
+                    className="transition-colors hover:text-gold-readable"
                 >
-          <span className="mb-1 block eyebrow text-gold">
+          <span className="mb-1 block eyebrow text-gold-readable">
             TikTok
           </span>
                     {SITE.handle}
@@ -138,15 +141,11 @@ export function Footer() {
                 </p>
 
                 <div className="flex flex-wrap gap-5">
-                    <Link href="/privacy" className="hover:text-gold">
+                    <Link href="/privacy" className="hover:text-gold-readable">
                         Privacy Policy
                     </Link>
 
-                    <Link href="/terms" className="hover:text-gold">
-                        Terms & Conditions
-                    </Link>
-
-                    <Link href="/cookies" className="hover:text-gold">
+                    <Link href="/cookies" className="hover:text-gold-readable">
                         Cookie Policy
                     </Link>
                 </div>
@@ -164,7 +163,7 @@ function FooterCol({
 }) {
     return (
         <div>
-            <p className="eyebrow text-gold">{title}</p>
+            <p className="eyebrow text-gold-readable">{title}</p>
 
             <div className="mt-5 flex flex-col gap-2.5 text-sm text-ivory/80">
                 {children}

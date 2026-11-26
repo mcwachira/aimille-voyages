@@ -1,7 +1,7 @@
 
 import type { ReactNode } from "react";
 
-import type { Service } from "@/content/services";
+import { serviceHref, type Service } from "@/content/services";
 import { PageHero } from "./PageHero";
 import { EnquiryForm } from "./EnquiryForm";
 import { WhatsAppLink } from "./WhatsAppLink";
@@ -32,7 +32,7 @@ export function ServiceDetail({
 
             <section className="container-x grid gap-16 py-24 lg:grid-cols-[1fr_1.1fr]">
                 <div>
-                    <p className="eyebrow text-gold">What we cover</p>
+                    <p className="eyebrow text-gold-readable">What we cover</p>
 
                     <ul className="mt-6 divide-y divide-border border-y border-border">
                         {s.covers.map((item) => (
@@ -45,7 +45,7 @@ export function ServiceDetail({
                         ))}
                     </ul>
 
-                    <p className="eyebrow mt-12 text-gold">Why it helps</p>
+                    <p className="eyebrow mt-12 text-gold-readable">Why it helps</p>
 
                     <ul className="mt-4 space-y-3">
                         {s.benefits.map((benefit) => (
@@ -79,7 +79,7 @@ export function ServiceDetail({
                 >
                     {extra}
 
-                    <p className="eyebrow text-gold">{FORMS[s.form].title}</p>
+                    <p className="eyebrow text-gold-readable">{FORMS[s.form].title}</p>
 
                     <h2 className="mb-8 mt-3 text-4xl text-primary">
                         {s.cta}
@@ -87,7 +87,7 @@ export function ServiceDetail({
 
                     <EnquiryForm
                         category={s.form}
-                        sourcePage={`/services/${s.slug}`}
+                        sourcePage={serviceHref(s)}
                         whatsappTopic={s.whatsapp}
                     />
                 </div>

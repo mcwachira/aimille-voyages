@@ -91,7 +91,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 hero-overlay" />
 
                 <div className="container-x relative pb-20 pt-40 text-ivory md:pb-28">
-                    <p className="eyebrow text-gold">
+                    <p className="eyebrow text-gold-readable">
                         Bespoke Travel &amp; Concierge Services
                     </p>
 
@@ -250,7 +250,7 @@ export default function HomePage() {
             <section className="bg-band py-24 text-band-foreground md:py-32">
                 <div className="container-x">
                     <Reveal>
-                        <p className="eyebrow flex items-center gap-4 text-gold">
+                        <p className="eyebrow flex items-center gap-4 text-gold-readable">
                             <span className="gold-rule" />
                             The AIMILLE Experience
                         </p>
@@ -267,7 +267,7 @@ export default function HomePage() {
                                 delay={i * 120}
                                 className="border-t border-gold/50 pt-8"
                             >
-                                <p className="font-serif text-6xl text-gold">
+                                <p className="font-serif text-6xl text-gold-readable">
                                     0{i + 1}
                                 </p>
 
@@ -309,7 +309,7 @@ export default function HomePage() {
 
                     <div className="bg-secondary px-6 py-20 md:px-16 md:py-32">
                         <Reveal>
-                            <p className="eyebrow text-gold">
+                            <p className="eyebrow text-gold-readable">
                                 Long-Stay Concierge
                             </p>
 

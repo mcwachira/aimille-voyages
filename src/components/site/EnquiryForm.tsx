@@ -373,7 +373,7 @@ export function ConsentRow({
                     respond to my enquiry, as described in the{" "}
                     <Link
                         href="/privacy"
-                        className="font-medium text-primary underline underline-offset-4 transition-colors hover:text-gold"
+                        className="font-medium text-primary underline underline-offset-4 transition-colors hover:text-gold-readable"
                     >
                         Privacy Policy
                     </Link>.
@@ -408,6 +408,7 @@ function FieldInput({
         id,
         ...register(field.name),
         "aria-invalid": !!error,
+        "aria-required": field.required || undefined,
         "aria-describedby": error ? errorId : undefined,
         placeholder: field.placeholder,
     };
@@ -427,7 +428,7 @@ function FieldInput({
                 {field.label}
 
                 {field.required && (
-                    <span className="ml-1 text-gold" aria-hidden="true">
+                    <span className="ml-1 text-gold-readable" aria-hidden="true">
             *
           </span>
                 )}

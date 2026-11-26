@@ -54,7 +54,7 @@ export default function ServicesPage() {
                         </div>
 
                         <div>
-                            <p className="eyebrow text-gold">
+                            <p className="eyebrow text-gold-readable">
                                 {String(index + 1).padStart(2, "0")}
                             </p>
 

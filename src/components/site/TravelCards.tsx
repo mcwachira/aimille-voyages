@@ -46,7 +46,7 @@ export function DestinationCard({
             <div className="absolute inset-0 card-overlay" />
 
             <div className="absolute inset-x-0 bottom-0 p-6 text-ivory">
-                <p className="eyebrow text-gold">{d.region}</p>
+                <p className="eyebrow text-gold-readable">{d.region}</p>
 
                 <h3 className="mt-2 text-3xl md:text-4xl">{d.name}</h3>
 
@@ -82,7 +82,7 @@ export function ServiceCard({
                 />
             </div>
 
-            <p className="eyebrow mt-6 text-gold">0{index + 1}</p>
+            <p className="eyebrow mt-6 text-gold-readable">0{index + 1}</p>
 
             <h3 className="mt-2 text-3xl text-primary">{s.title}</h3>
 

@@ -20,7 +20,7 @@ export async function submitEnquiry(input: unknown) {
             "Please check your enquiry details and try again.",
         );
     }
-    
+
 
     const data = parsed.data;
 

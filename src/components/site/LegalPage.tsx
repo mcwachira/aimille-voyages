@@ -13,10 +13,10 @@ export function LegalPage({
                               children,
                           }: LegalPageProps) {
     return (
-        <main className="container-x pb-24 pt-36 md:pb-32 md:pt-44">
+        <div className="container-x pb-24 pt-36 md:pb-32 md:pt-44">
             <article className="mx-auto max-w-3xl">
                 <header className="border-b border-border pb-10">
-                    <p className="eyebrow text-gold">
+                    <p className="eyebrow text-gold-readable">
                         AIMILLE VOYAGES
                     </p>
 
@@ -48,6 +48,6 @@ export function LegalPage({
                     {children}
                 </div>
             </article>
-        </main>
+        </div>
     );
 }

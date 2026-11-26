@@ -1,25 +1,32 @@
 
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
+import {
+    Cormorant_Garamond,
+    DM_Sans,
+    JetBrains_Mono,
+} from "next/font/google";
 import Script from "next/script";
 
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { GA_ID } from "@/lib/analytics";
 import { Navbar } from "@/components/site/Navbar";
+import { PublicSiteChrome } from "@/components/site/PublicSiteChrome";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Footer } from "@/components/site/Footer";
+import { getPublicSiteOrigin } from "@/lib/site-origin";
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
+const dmSans = DM_Sans({
+    variable: "--font-dm-sans",
     subsets: ["latin"],
     display: "swap",
 });
 
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
+const cormorantGaramond = Cormorant_Garamond({
+    variable: "--font-cormorant-garamond",
     subsets: ["latin"],
     display: "swap",
+    style: ["normal", "italic"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -29,9 +36,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL(
-        process.env.NEXT_PUBLIC_SITE_URL || "https://aimillevoyages.com",
-    ),
+    metadataBase: new URL(getPublicSiteOrigin()),
     title: {
         default: "AIMILLE VOYAGES | Bespoke Travel & Concierge in Kenya",
         template: "%s",
@@ -89,20 +94,22 @@ export default function RootLayout({
             className={cn(
                 "h-full",
                 "antialiased",
-                geistSans.variable,
-                geistMono.variable,
+                dmSans.variable,
+                cormorantGaramond.variable,
                 jetbrainsMono.variable,
             )}
         >
-        <body className="flex min-h-full flex-col font-sans">
+        <body className="flex min-h-screen min-h-[100dvh] flex-col font-sans">
+        <a
+            href="#main-content"
+            className="sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-background focus:px-4 focus:py-3 focus:text-foreground"
+        >
+            Skip to main content
+        </a>
         <ThemeProvider>
-            <Navbar />
-
-            <div className="flex-1">
+            <PublicSiteChrome header={<Navbar />} footer={<Footer />}>
                 {children}
-            </div>
-
-            <Footer />
+            </PublicSiteChrome>
         </ThemeProvider>
 
         {GA_ID && (

@@ -42,12 +42,12 @@ export default function LongStayPage() {
 
             <section className="bg-band py-24 text-band-foreground">
                 <div className="container-x">
-                    <p className="eyebrow text-gold">Indicative stay durations</p>
+                    <p className="eyebrow text-gold-readable">Indicative stay durations</p>
 
                     <div className="mt-10 grid gap-px bg-gold/30 md:grid-cols-3">
                         {STAYS.map(([duration, title]) => (
                             <div key={duration} className="bg-band p-10">
-                                <p className="font-serif text-6xl text-gold">{duration}</p>
+                                <p className="font-serif text-6xl text-gold-readable">{duration}</p>
                                 <p className="eyebrow mt-4 text-ivory">{title}</p>
                             </div>
                         ))}

@@ -1,12 +1,14 @@
 import type { MetadataRoute } from "next";
 
+import { getPublicSiteOrigin } from "@/lib/site-origin";
+
 export default function robots(): MetadataRoute.Robots {
     return {
         rules: {
             userAgent: "*",
             allow: "/",
-            disallow: "/studio/",
+            disallow: ["/dashboard", "/auth/callback", "/studio/"],
         },
-        sitemap: "https://aimillevoyages.com/sitemap.xml",
+        sitemap: `${getPublicSiteOrigin()}/sitemap.xml`,
     };
 }

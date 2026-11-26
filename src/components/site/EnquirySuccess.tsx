@@ -32,7 +32,7 @@ export function EnquirySuccess({
         >
             <span className="gold-rule mx-auto" aria-hidden="true" />
 
-            <p className="eyebrow mt-6 text-gold">
+            <p className="eyebrow mt-6 text-gold-readable">
                 Enquiry received
             </p>
 

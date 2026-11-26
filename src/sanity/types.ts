@@ -77,3 +77,71 @@ export type SanityExperience = {
         metaDescription?: string;
     };
 };
+
+export type SanityRelatedDestination = {
+    _id: string;
+    name: string;
+    slug: string;
+    country?: string;
+    region?: string;
+    summary?: string;
+    image?: SanityImage;
+};
+
+export type SanityRelatedExperience = {
+    _id: string;
+    title: string;
+    slug: string;
+    description?: string;
+    duration?: string;
+    durationVerified?: boolean;
+    image?: SanityImage;
+};
+
+export type SanityEditorialSeo = {
+    metaTitle?: string;
+    metaDescription?: string;
+};
+
+export type SanityTravelPackage = {
+    _id: string;
+    _updatedAt?: string;
+    title: string;
+    slug: string;
+    summary: string;
+    description?: string;
+    duration?: string;
+    destinations?: Array<SanityRelatedDestination | null>;
+    experiences?: Array<SanityRelatedExperience | null>;
+    image?: SanityImage;
+    featured?: boolean;
+    seo?: SanityEditorialSeo;
+};
+
+export type SanityArticle = {
+    _id: string;
+    _updatedAt?: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    body: string;
+    image?: SanityImage;
+    category?: string;
+    publishedAt?: string;
+    featured?: boolean;
+    seo?: SanityEditorialSeo;
+};
+
+export type SanityGuide = {
+    _id: string;
+    _updatedAt?: string;
+    title: string;
+    slug: string;
+    summary: string;
+    body: string;
+    destinations?: Array<SanityRelatedDestination | null>;
+    experiences?: Array<SanityRelatedExperience | null>;
+    image?: SanityImage;
+    featured?: boolean;
+    seo?: SanityEditorialSeo;
+};
